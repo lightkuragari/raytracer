@@ -6,9 +6,9 @@
 
 struct Hit
 {
-	Vector3 intersections;
-	Vector3 normals;
-	float distances;
+	Vector3 point;
+	Vector3 normal;
+	float t;
 	Material* material;
 };
 

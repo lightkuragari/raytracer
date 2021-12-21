@@ -25,8 +25,8 @@ bool Lambert::Scatter(const Ray& in, const Hit& hit, Vector3& attenuation, Ray& 
 		scatter = Vector3(dist(mt), dist(mt), dist(mt));
 	} while (scatter.LengthSquared() > 1.f);
 
-	Vector3 target = hit.intersections + hit.normals + scatter;
-	out.Setup(hit.intersections, (target - hit.intersections).Normal());
+	Vector3 target = hit.point + hit.normal + scatter;
+	out.Setup(hit.point, (target - hit.point).Normal());
 	attenuation = albedo;
 	return true;
 }

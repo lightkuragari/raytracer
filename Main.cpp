@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 		Hit hit;
 		if (floor->IsHitWithSphereRay(*sphere, ray, hit))
 		{
-			sphere->SetPosition(hit.intersections);
+			sphere->SetPosition(hit.point);
 		}
 	}
 

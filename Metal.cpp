@@ -20,7 +20,7 @@ Metal::Metal(const Vector3& albedo, float fuzzyness)
 
 bool Metal::Scatter(const Ray& in, const Hit& hit, Vector3& attenuation, Ray& out) const
 {
-	Vector3 reflected = Reflect(in.GetDirection(), hit.normals);
+	Vector3 reflected = Reflect(in.GetDirection(), hit.normal);
 	// Generate random point based on unit sphere over the normal of the hit point.
 	Vector3 scatter;
 	do
@@ -28,11 +28,11 @@ bool Metal::Scatter(const Ray& in, const Hit& hit, Vector3& attenuation, Ray& ou
 		scatter = Vector3(dist(mt), dist(mt), dist(mt));
 	} while (scatter.LengthSquared() > 1.f);
 
-	Vector3 target = hit.intersections + reflected + scatter * fuzziness;
-	out.Setup(hit.intersections, (target - hit.intersections).Normal());
+	Vector3 target = hit.point + reflected + scatter * fuzziness;
+	out.Setup(hit.point, (target - hit.point).Normal());
 	attenuation = albedo;	
 
-	return out.GetDirection().Dot(hit.normals) > 0.f;
+	return out.GetDirection().Dot(hit.normal) > 0.f;
 }
 
 Vector3 Metal::Reflect(const Vector3& in, const Vector3& normal) const

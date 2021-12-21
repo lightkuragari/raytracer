@@ -57,7 +57,7 @@ Vector3 Camera::GetColor(const Ray& ray, const std::vector<Hitable*>& world, int
 {
 	Vector3 color;
 	Hit closest;
-	closest.distances = FLT_MAX;
+	closest.t = FLT_MAX;
 
 	if (depth >= 50)
 	{
@@ -72,7 +72,7 @@ Vector3 Camera::GetColor(const Ray& ray, const std::vector<Hitable*>& world, int
 		if (world[i]->IsHit(ray, hit))
 		{
 			wasHit = true;
-			if (hit.distances < closest.distances)
+			if (hit.t < closest.t)
 			{
 				closest = hit;
 			}
@@ -90,16 +90,9 @@ Vector3 Camera::GetColor(const Ray& ray, const std::vector<Hitable*>& world, int
 		}
 
 		return color;
-		/*static const Vector3 added(1.f, 1.f, 0.f);
-		static const Vector3 divided(2.f, 2.f, 1.f);
-
-		color += (closest.normals[0] + added) / divided * 255.99f;*/
 	}
 	else
 	{
-		/*float u = (float)x / resolutionX;
-		float v = (float)(resolutionY - y) / resolutionY;*/
-
 		// Get scene uv coords from ray direction and camera parameters.
 		Vector3 c = ray.GetDirection();
 		c /= c.Dot(direction * focalDistance);
