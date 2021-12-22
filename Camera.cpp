@@ -1,3 +1,4 @@
+#include <float.h>
 #include "Camera.h"
 #include "Sphere.h"
 #include "Hit.h"

@@ -18,5 +18,5 @@ protected:
 
 	// Random number generator
 	mutable std::mt19937 mt;
-	std::uniform_real_distribution<float> dist;
+	mutable std::uniform_real_distribution<float> dist;
 };
