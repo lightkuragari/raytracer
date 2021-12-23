@@ -1,6 +1,6 @@
 # Raytracer
 Simple raytracer implementation based on the raytracing mini books by Peter Shirley
-![image](image.png)
+![image!](https://cloud.lightkuragari.com/index.php/s/gspiSs9QWDCAdMM/download/image.png)
 
 # Usage:
 
