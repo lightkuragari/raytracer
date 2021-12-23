@@ -16,7 +16,7 @@ bool Sphere::RayVsSphere(const Ray& ray, Hit& hit, float radius) const
 
 	float a = direction.LengthSquared();
 	float b = -2.f * direction.Dot(toCenter);
-	float c = toCenter.LengthSquared() - (r + radius) * (r + radius);
+	float c = toCenter.LengthSquared() - (r + fabs(radius)) * (r + fabs(radius));
 
 	float condition = (b * b) - (4.f * a * c);
 
@@ -36,7 +36,7 @@ bool Sphere::RayVsSphere(const Ray& ray, Hit& hit, float radius) const
 		{
 			hit.point = origin + direction * t;
 			hit.t = t;
-			hit.normal = (hit.point - center).Normal();
+			hit.normal = (hit.point - center) / r;
 			return true;
 		}
 
@@ -45,20 +45,20 @@ bool Sphere::RayVsSphere(const Ray& ray, Hit& hit, float radius) const
 		{
 			hit.point = origin + direction * t;
 			hit.t = t;
-			hit.normal = (hit.point - center).Normal();
+			hit.normal = (hit.point - center) / r;
 			return true;
 		}
 	}
 	else if (condition == 0)
 	{
 		// Tangency
-		float t = -b + sqrtf(condition) / (2.f * a);
+		float t = (-b + sqrtf(condition)) / (2.f * a);
 
 		if (t > tmin)
 		{
 			hit.point = origin + direction * t;
 			hit.t = t;
-			hit.normal = (hit.point - center).Normal();
+			hit.normal = (hit.point - center) / r;
 			return true;
 		}
 	}
